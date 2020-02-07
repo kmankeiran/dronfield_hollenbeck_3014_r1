@@ -26,7 +26,9 @@ function login($username, $password, $ip){
             while($found_user = $user_check->fetch(PDO::FETCH_ASSOC)){
                 $id = $found_user['user_id'];
                 //Logged in!
-                $message = 'You just logged in!';
+                $message = 'You Logged In! Last Successful Login: ';
+                
+                displaytime();
                 //TODO finish the following lines so that when your user logged in
                 // The user_ip column get updated by the $ip
                 $update_query = 'UPDATE tbl_user SET user_ip = :ip WHERE user_id = :id';
