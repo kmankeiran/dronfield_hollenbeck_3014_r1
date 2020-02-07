@@ -1,6 +1,8 @@
 <?php 
 
-function login($username, $password, $ip){
+date_default_timezone_set("America/New_York");
+
+function login($username, $password, $user_date){
     $pdo = Database::getInstance()->getConnection();
     //Check existance
     $check_exist_query = 'SELECT COUNT(*) FROM tbl_user WHERE user_name= :username';
@@ -25,20 +27,20 @@ function login($username, $password, $ip){
 
             while($found_user = $user_check->fetch(PDO::FETCH_ASSOC)){
                 $id = $found_user['user_id'];
+                $current_time = CURRENT_TIMESTAMP();
                 //Logged in!
-                $message = 'You Logged In! Last Successful Login: ';
                 
-                displaytime();
                 //TODO finish the following lines so that when your user logged in
                 // The user_ip column get updated by the $ip
-                $update_query = 'UPDATE tbl_user SET user_ip = :ip WHERE user_id = :id';
+                $update_query = 'UPDATE tbl_user SET user_date = CURRENT_TIMESTAMP WHERE user_id = :id';
                 $update_set = $pdo->prepare($update_query);
                 $update_set->execute(
                     array(
-                        ':ip'=>$ip,
                         ':id'=>$id
+                        'CURRENT_TIMESTAMP'=>$timestamp
                     )
                 );
+
             }
 
             if(isset($id)){

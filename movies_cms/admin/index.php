@@ -1,5 +1,7 @@
 <?php 
     require_once '../load.php';
+    require_once 'scripts/functions.php';
+    require_once 'scripts/login.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +14,15 @@
 </head>
 <body>
     <h2>Welcome! Admin</h2>
+
+<?php 
+    echo displaytime();
+
+    echo "The time is: " . date("h:i:sa");
+
+    echo $timestamp
+?> 
+    
 
 </body>
 </html>
